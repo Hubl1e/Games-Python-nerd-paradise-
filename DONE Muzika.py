@@ -40,13 +40,14 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:   # play
+            if event.key == pygame.K_SPACE:   #играет
                 play_song()
-            elif event.key == pygame.K_s:     # stop
+            elif event.key == pygame.K_s:     #остановливпет
                 stop_song()
-            elif event.key == pygame.K_RIGHT: # next
+            elif event.key == pygame.K_RIGHT: #следующая песня
                 next_song()
-            elif event.key == pygame.K_LEFT:  # previous
+            elif event.key == pygame.K_LEFT:  #прошлая пенся
                 previous_song()
+
 
 pygame.quit()
