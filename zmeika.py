@@ -11,10 +11,10 @@ pygame.display.set_caption("Zmeika")
 
 clock = pygame.time.Clock()
 
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
+BELIY = (255, 255, 255)
+CHERNY = (0, 0, 0)
+KRASNY = (255, 0, 0)
+ZELENIY = (0, 255, 0)
 
 
 snake_pos = [[100, 100]]  #башка змеи
@@ -98,4 +98,5 @@ while True:
 
 pygame.quit()
 sys.exit()
+
 
