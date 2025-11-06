@@ -3,11 +3,11 @@ import sys
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Простой Paint")
+pygame.display.set_caption("Пеинт")
 clock = pygame.time.Clock()
 
 canvas = pygame.Surface((800, 600))
-canvas.fill((0, 0, 0))  # фон черный
+canvas.fill((0, 0, 0))  #фон черный
 
 tool = "draw"  
 color = (255, 255, 255)
@@ -65,3 +65,4 @@ while True:
     screen.blit(canvas, (0, 0))
     pygame.display.flip()
     clock.tick(60)
+
