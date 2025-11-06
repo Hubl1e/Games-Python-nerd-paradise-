@@ -7,7 +7,7 @@ SCREEN_HEIGHT = 400
 BLOCK_SIZE = 20
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Snake Game")
+pygame.display.set_caption("Zmeika")
 
 clock = pygame.time.Clock()
 
@@ -16,7 +16,7 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
-#значения змеи
+
 snake_pos = [[100, 100]]  #башка змеи
 snake_direction = "RIGHT"
 change_to = snake_direction
@@ -36,7 +36,6 @@ food_pos = generate_food()
 
 font = pygame.font.SysFont("Verdana", 20)
 
-#цикл работы кода и движенья
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -99,3 +98,4 @@ while True:
 
 pygame.quit()
 sys.exit()
+
