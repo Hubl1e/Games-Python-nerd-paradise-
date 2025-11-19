@@ -7,7 +7,7 @@ SCREEN_HEIGHT = 400
 BLOCK_SIZE = 20
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Snake Game")
+pygame.display.set_caption("змея зилёная")
 
 clock = pygame.time.Clock()
 
@@ -24,19 +24,25 @@ speed = 10
 score = 0
 level = 1
 
-#еда появляется рандомно
+#еда появляется рандомно с цветом и весом
 def generate_food():
     while True:
         x = random.randrange(0, SCREEN_WIDTH, BLOCK_SIZE)
         y = random.randrange(0, SCREEN_HEIGHT, BLOCK_SIZE)
         if [x, y] not in snake_pos:
-            return [x, y]
+            color = random.choice([RED, (255, 255, 0), GREEN])  # красный, желтый, зеленый
+            if color == RED:
+                weight = 1
+            elif color == (255, 255, 0):
+                weight = 2
+            else:
+                weight = 3
+            return [x, y], color, weight
 
-food_pos = generate_food()
+food_pos, food_color, food_weight = generate_food()
+food_spawn_time = pygame.time.get_ticks()
+FOOD_LIFETIME = 8000 #8 тыщ миллисекунд типо 8 секунд
 
-food_weight = random.choice([1, 2, 3])  #вес еды
-food_spawn_time = pygame.time.get_ticks()  #время появления еды
-FOOD_LIFETIME = 8000  #8 тыщ милисекунд то есть 8 секунд
 
 
 font = pygame.font.SysFont("Verdana", 20)
@@ -74,14 +80,14 @@ while True:
 
 #чекает съел ли еду
     if snake_pos[0] == food_pos:
-        score += food_weight  #прибавляем вес еды
+        score += food_weight
         if score % 3 == 0:
             level += 1
             speed += 2
-        #генерируем новую еду
-        food_pos = generate_food()
-        food_weight = random.choice([1, 2, 3])
+        #создает новые фрукты с цветом
+        food_pos, food_color, food_weight = generate_food()
         food_spawn_time = pygame.time.get_ticks()
+
     else:
         snake_pos.pop() #удаляет хвост если не съел
 
@@ -89,9 +95,7 @@ while True:
         #проверка таймера еды
         current_time = pygame.time.get_ticks()
         if current_time - food_spawn_time >= FOOD_LIFETIME:
-            #через 8 сек новое яблоко идёт
-            food_pos = generate_food()
-            food_weight = random.choice([1, 2, 3])
+            food_pos, food_color, food_weight = generate_food()
             food_spawn_time = pygame.time.get_ticks()
 
     #чекает косается край экрана или себя
@@ -103,7 +107,8 @@ while True:
     screen.fill(BLACK)
     for block in snake_pos:
         pygame.draw.rect(screen, GREEN, pygame.Rect(block[0], block[1], BLOCK_SIZE, BLOCK_SIZE))
-    pygame.draw.rect(screen, RED, pygame.Rect(food_pos[0], food_pos[1], BLOCK_SIZE, BLOCK_SIZE))
+    pygame.draw.rect(screen, food_color, pygame.Rect(food_pos[0], food_pos[1], BLOCK_SIZE, BLOCK_SIZE))
+
 
     #показывает счет и уровень
     score_text = font.render(f"Score: {score}", True, WHITE)
